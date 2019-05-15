@@ -2,9 +2,13 @@ package dbsqlite;
 
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class Interfaz extends javax.swing.JFrame{
-
+    
+    Metodos metodos = new Metodos();
+    
     public Interfaz(){
         initComponents();
     }
@@ -21,6 +25,7 @@ public class Interfaz extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SQLite");
+        setResizable(false);
 
         jButton1.setText("Insertar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -92,84 +97,77 @@ public class Interfaz extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
-            String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
-            if(!nombre.isBlank() && !apellidos.isBlank()){
-                Metodos metodos = new Metodos();
-                metodos.insertar(nombre, apellidos);
-                JOptionPane.showMessageDialog(null, "Inserción exitosa :)", "SQLite", 1);
+        String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
+        String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
+        if(!nombre.isBlank() && !apellidos.isBlank()){
+            if(metodos.insertar(nombre, apellidos)){
+                JOptionPane.showMessageDialog(null, "Entrada insertada satisfactoriamente.", "SQLite", 1);
             }else{
-                JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
             }
-        }catch(SQLException e1){
-            JOptionPane.showMessageDialog(null, "¡Ups! Ha ocurrido un error.", "SQLite", 0);
-            System.out.println(e1.getMessage());
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try{
-            Metodos metodos = new Metodos();
-            String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
-            if(!id.isBlank()){
-                String query = metodos.consultar(id);
-                if(!query.isBlank()){
-                    JOptionPane.showMessageDialog(null, query, "SQLite", 1);
-                }else{
-                    JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 1);
-                }
+        String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
+        if(!id.isBlank()){
+            String query = metodos.consultar(id);
+            if(!query.isBlank()){
+                JOptionPane.showMessageDialog(null, query, "SQLite", 1);
             }else{
-                JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
             }
-        }catch(SQLException e1){
-            JOptionPane.showMessageDialog(null, "¡Ups! Ha ocurrido un error.", "SQLite", 0);
-            System.out.println(e1.getMessage());
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try{
-            Metodos metodos = new Metodos();
-            String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
-            if(!id.isBlank()){
-                metodos.eliminar(id);
-            }else{
-                JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
-            }
-        }catch(SQLException e1){
-            JOptionPane.showMessageDialog(null, "¡Ups! Ha ocurrido un error.", "SQLite", 0);
-            System.out.println(e1.getMessage());
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            Metodos metodos = new Metodos();
-            String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
-            if(!id.isBlank()){
-                String query = metodos.consultar(id);
-                if(!query.isBlank()){
-                    String nombre = JOptionPane.showInputDialog(null, "Introduzca el nuevo nombre para:\n" + query, "SQLite", 3);
-                    String apellidos = JOptionPane.showInputDialog(null, "Introduzca los nuevos apellidos para:\n" + query, "SQLite", 3);
-                    metodos.modificar(id, nombre, apellidos);
-                }else{
-                    JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 1);
+        String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
+        if(!id.isBlank()){
+            String query = metodos.consultar(id);
+            if(!query.isBlank()){
+                int op = JOptionPane.showOptionDialog(null, "¿Estás seguro?\n" + query, "SQLite", 0, 3, null, new String[]{"Si","No"}, null);
+                if( op == 0){
+                    if(metodos.eliminar(id)){
+                        JOptionPane.showMessageDialog(null, "Entrada eliminada satisfactoriamente.", "SQLite", 1);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+                    }
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
             }
-        }catch(SQLException e1){
-            JOptionPane.showMessageDialog(null, "¡Ups! Ha ocurrido un error.", "SQLite", 0);
-            System.out.println(e1.getMessage());
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+    
+    
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String id = JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3);
+        if(!id.isBlank()){
+            String query = metodos.consultar(id);
+            if(!query.isBlank()){
+                String nombre = JOptionPane.showInputDialog(null, "Introduzca el nuevo nombre para:\n" + query, "SQLite", 3);
+                String apellidos = JOptionPane.showInputDialog(null, "Introduzca los nuevos apellidos para:\n" + query, "SQLite", 3);
+                if(!nombre.isBlank() && !apellidos.isBlank()){
+                    if(metodos.modificar(id, nombre, apellidos)){
+                        JOptionPane.showMessageDialog(null, "Entrada actualizada satisfactoriamente.", "SQLite", 1);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

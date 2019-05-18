@@ -12,7 +12,7 @@ public class Interfaz extends javax.swing.JFrame{
             System.out.println("[ info ] Conexión satisfactoria.");
             initComponents();
         }else{
-            JOptionPane.showMessageDialog(null, "No se ha podido establecer una conexión con la base de datos.", "SQLite", 0);
+            JOptionPane.showMessageDialog(null, "Error de conexión.", "SQLite", 0);
             System.out.println("[ error ] No se ha podido establecer una conexión con la base de datos.");
             System.exit(0);
         }
@@ -28,13 +28,15 @@ public class Interfaz extends javax.swing.JFrame{
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("SQLite");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 204));
 
+        jButton1.setBackground(new java.awt.Color(229, 229, 229));
         jButton1.setText("Insertar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,6 +44,7 @@ public class Interfaz extends javax.swing.JFrame{
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(229, 229, 229));
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +52,7 @@ public class Interfaz extends javax.swing.JFrame{
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(229, 229, 229));
         jButton3.setText("Consultar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +60,7 @@ public class Interfaz extends javax.swing.JFrame{
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(229, 229, 229));
         jButton4.setText("Eliminar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,10 +68,19 @@ public class Interfaz extends javax.swing.JFrame{
             }
         });
 
+        jButton5.setBackground(new java.awt.Color(229, 229, 229));
         jButton5.setText("Nueva Tabla");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(229, 229, 229));
+        jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -75,21 +89,31 @@ public class Interfaz extends javax.swing.JFrame{
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 90, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,41 +121,51 @@ public class Interfaz extends javax.swing.JFrame{
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // INSERTAR
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
-        String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
-        if(!nombre.isBlank() && !apellidos.isBlank()){
-            int f = bd.insertar(nombre, apellidos);
-            if(f > 0){
-                JOptionPane.showMessageDialog(null, "Entrada insertada satisfactoriamente.", "SQLite", 1);
-                System.out.println("[ info ] " + f + " fila(s) afectada(s)");
-            }else{
-                JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
-            }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(bd.crear(JOptionPane.showInputDialog(null, "Introduzca el nombre de la tabla:\n", "SQLite", 3))){
+            JOptionPane.showMessageDialog(null, "Tabla creada satisfactoriamente.", "SQLite", 1);
         }else{
-            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+            JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
+//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+        try{
+            int f = bd.eliminar(Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3)));
+            if(f > 0){
+                JOptionPane.showMessageDialog(null, "Entrada eliminada satisfactoriamente.", "SQLite", 1);
+                System.out.println("[ info ] " + f + " fila(s) afectada(s).");
+            }else{
+                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
+            System.out.println("[ error ] " + e.getMessage());
+        }
+    }
+//GEN-LAST:event_jButton4ActionPerformed
 
-    // CONSULTAR
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try{
             String query = bd.consultar(Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3)));
@@ -146,13 +180,22 @@ public class Interfaz extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    // ELIMINAR
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
-            int f = bd.eliminar(Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3)));
-            if(f > 0){
-                JOptionPane.showMessageDialog(null, "Entrada eliminada satisfactoriamente.", "SQLite", 1);
-                System.out.println("[ info ] " + f + " fila(s) afectada(s)");
+            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3));
+            String query = bd.consultar(id);
+            if(query != null){
+                String nombre = JOptionPane.showInputDialog(null, "Introduzca el nuevo nombre para:\n" + query, "SQLite", 3);
+                String apellidos = JOptionPane.showInputDialog(null, "Introduzca los nuevos apellidos para:\n" + query, "SQLite", 3);
+                if(!nombre.isBlank() && !apellidos.isBlank()){
+                    if(bd.modificar(id, nombre, apellidos) > 0){
+                        JOptionPane.showMessageDialog(null, "Entrada actualizada satisfactoriamente.", "SQLite", 1);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
             }
@@ -160,41 +203,32 @@ public class Interfaz extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
             System.out.println("[ error ] " + e.getMessage());
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
-    
-    // MODIFICAR
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3));
-                String query = bd.consultar(id);
-                if(query != null){
-                    String nombre = JOptionPane.showInputDialog(null, "Introduzca el nuevo nombre para:\n" + query, "SQLite", 3);
-                    String apellidos = JOptionPane.showInputDialog(null, "Introduzca los nuevos apellidos para:\n" + query, "SQLite", 3);
-                    if(!nombre.isBlank() && !apellidos.isBlank()){
-                        if(bd.modificar(id, nombre, apellidos) > 0){
-                            JOptionPane.showMessageDialog(null, "Entrada actualizada satisfactoriamente.", "SQLite", 1);
-                        }else{
-                            JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
-                }
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
-            System.out.println("[ error ] " + e.getMessage());
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(bd.crearTabla(JOptionPane.showInputDialog(null, "Introduzca el nombre para la nueva tabla:\n", "SQLite", 3))){
-            JOptionPane.showMessageDialog(null, "Tabla creada satisfactoriamente.", "SQLite", 1);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
+        String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
+        if(!nombre.isBlank() && !apellidos.isBlank()){
+            int f = bd.insertar(nombre, apellidos);
+            if(f > 0){
+                JOptionPane.showMessageDialog(null, "Entrada insertada satisfactoriamente.", "SQLite", 1);
+                System.out.println("[ info ] " + f + " fila(s) afectada(s).");
+            }else{
+                JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(bd.desconectar()){
+            System.out.println("[ info ] Desconexión satisfactoria.");
+        }else{
+            System.out.println("[ error ] Ha habido problemas en la desconexión.");
+        }
+        System.exit(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public static void main(String args[]){
         java.awt.EventQueue.invokeLater(new Runnable(){
@@ -210,6 +244,7 @@ public class Interfaz extends javax.swing.JFrame{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

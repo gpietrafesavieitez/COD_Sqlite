@@ -32,7 +32,16 @@ public class SQLite{
         }
     }
     
-    public boolean crearTabla(String tabla){
+    public boolean desconectar(){
+        try{
+            conn.close();
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
+    }
+    
+    public boolean crear(String tabla){
         try{
             PreparedStatement st = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tabla + "(id integer PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(140), apellidos VARCHAR(140))");
             st.execute();
@@ -41,7 +50,7 @@ public class SQLite{
             return false;
         }   
     }
-      
+    
     public int insertar(String nombre, String apellidos){
         try{
             PreparedStatement st = conn.prepareStatement("INSERT INTO " + tabla + "(nombre, apellidos) VALUES ('" + nombre + "', '" + apellidos + "')");
@@ -66,7 +75,7 @@ public class SQLite{
             ResultSet result = st.executeQuery();
             StringBuilder sb = new StringBuilder();
             while(result.next()){
-                sb.append("- Id: " + result.getInt("id") + "\n- Nombre: " + result.getString("nombre") + "\n- Apellidos: " + result.getString("apellidos"));
+                sb.append("- Nombre: " + result.getString("nombre") + "\n- Apellidos: " + result.getString("apellidos"));
             }
             if(sb.length() != 0){
                 return sb.toString();

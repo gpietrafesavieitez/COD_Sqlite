@@ -147,7 +147,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e5" green="e5" red="e5" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nueva Tabla"/>
+            <Property name="text" type="java.lang.String" value="Crear tabla"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>

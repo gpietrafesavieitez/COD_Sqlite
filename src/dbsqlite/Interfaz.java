@@ -69,7 +69,7 @@ public class Interfaz extends javax.swing.JFrame{
         });
 
         jButton5.setBackground(new java.awt.Color(229, 229, 229));
-        jButton5.setText("Nueva Tabla");
+        jButton5.setText("Crear tabla");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -152,7 +152,7 @@ public class Interfaz extends javax.swing.JFrame{
 //GEN-FIRST:event_jButton4ActionPerformed
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            int f = bd.eliminar(Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3)));
+            int f = bd.eliminar(Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3)));
             if(f > 0){
                 JOptionPane.showMessageDialog(null, "Entrada eliminada satisfactoriamente.", "SQLite", 1);
                 System.out.println("[ info ] " + f + " fila(s) afectada(s).");
@@ -168,7 +168,7 @@ public class Interfaz extends javax.swing.JFrame{
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try{
-            String query = bd.consultar(Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3)));
+            String query = bd.consultar(Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3)));
             if(query != null){
                 JOptionPane.showMessageDialog(null, query, "SQLite", 1);
             }else{
@@ -182,12 +182,12 @@ public class Interfaz extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
-            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Introduzca el ID:", "SQLite", 3));
+            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3));
             String query = bd.consultar(id);
             if(query != null){
-                String nombre = JOptionPane.showInputDialog(null, "Introduzca el nuevo nombre para:\n" + query, "SQLite", 3);
-                String apellidos = JOptionPane.showInputDialog(null, "Introduzca los nuevos apellidos para:\n" + query, "SQLite", 3);
-                if(!nombre.isBlank() && !apellidos.isBlank()){
+                String nombre = JOptionPane.showInputDialog(null, "Introduzca nuevo nombre para:\n" + query, "SQLite", 3);
+                String apellidos = JOptionPane.showInputDialog(null, "Introduzca nuevo(s) apellido(s) para:\n" + query, "SQLite", 3);
+                if(!nombre.isEmpty() && !apellidos.isEmpty()){
                     if(bd.modificar(id, nombre, apellidos) > 0){
                         JOptionPane.showMessageDialog(null, "Entrada actualizada satisfactoriamente.", "SQLite", 1);
                     }else{
@@ -208,7 +208,7 @@ public class Interfaz extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
         String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
-        if(!nombre.isBlank() && !apellidos.isBlank()){
+        if(!nombre.isEmpty() && !apellidos.isEmpty()){
             int f = bd.insertar(nombre, apellidos);
             if(f > 0){
                 JOptionPane.showMessageDialog(null, "Entrada insertada satisfactoriamente.", "SQLite", 1);

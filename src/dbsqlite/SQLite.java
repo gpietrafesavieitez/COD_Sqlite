@@ -10,7 +10,7 @@ import java.sql.ResultSet;
  * Esta clase sirve de herramienta principal para trabajar e interactuar con SQLite.
  * @author: gpietrafesavieitez
  * @version: 20/05/19
- * @see <a href = "https://moodle.danielcastelao.org" />CPR Daniel Castelao - Moodle</a>
+ * @see <a href = "https://moodle.danielcastelao.org">CPR Daniel Castelao - Moodle</a>
  */
 
 public class SQLite{
@@ -22,17 +22,17 @@ public class SQLite{
     }
     
     /**
-     * Constructor con parámetros para una base de datos previamente definida
-     * @param bd define una base de datos concreta
+     * Constructor con parámetros para una base de datos previamente definida.
+     * @param bd Define una base de datos concreta.
      */
     public SQLite(String bd){
         this.bd = bd;
     }
     
     /**
-     * Constructor con parámetros para una base de datos y una tabla previamente definidas
-     * @param bd define una base de datos concreta
-     * @param tabla define una tabla concreta
+     * Constructor con parámetros para una base de datos y una tabla previamente definidas.
+     * @param bd Define una base de datos concreta.
+     * @param tabla Define una tabla concreta.
      */
     public SQLite(String bd, String tabla){
         this.bd = bd;
@@ -40,8 +40,8 @@ public class SQLite{
     }
     
     /**
-     * Establece una conexión entre la aplicación y la base de datos
-     * @return Devuelve verdadero en el caso de una conexión exitosa, de lo contrario devuelve falso
+     * Establece una conexión entre la aplicación y la base de datos.
+     * @return Devuelve verdadero en el caso de una conexión exitosa, de lo contrario devuelve falso.
      */
     public boolean conectar(){
         try{
@@ -53,8 +53,8 @@ public class SQLite{
     }
     
     /**
-     * Exige una desconexión entre la aplicación y la base de datos
-     * @return Devuelve verdadero en el caso de una desconexión exitosa, de lo contrario devuelve falso
+     * Exige una desconexión entre la aplicación y la base de datos.
+     * @return Devuelve verdadero en el caso de una desconexión exitosa, de lo contrario devuelve falso.
      */
     public boolean desconectar(){
         try{
@@ -66,8 +66,9 @@ public class SQLite{
     }
     
     /**
-     * Prepara y ejecuta la orden de crear una tabla con un parámetro concreto que especifica el nombre de la misma
-     * @return Devuelve verdadero en el caso de que la sentencia sea exitosa, de lo contrario devuelve falso
+     * Prepara y ejecuta la orden de crear una tabla.
+     * @param tabla Define el nombre de la tabla a crear.
+     * @return Devuelve verdadero en el caso de que la sentencia sea exitosa, de lo contrario devuelve falso.
      */
     public boolean crear(String tabla){
         try{
@@ -80,8 +81,10 @@ public class SQLite{
     }
     
     /**
-     * Prepara y ejecuta la orden de insertar en una tabla los datos especificados como parámetros
-     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1
+     * Prepara y ejecuta la orden de insertar datos en una tabla.
+     * @param nombre Define un campo de la tabla de tipo cadena de texto.
+     * @param apellidos Define un campo de la tabla de tipo cadena de texto.
+     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1.
      */
     public int insertar(String nombre, String apellidos){
         try{
@@ -93,8 +96,11 @@ public class SQLite{
     }
     
     /**
-     * Prepara y ejecuta la orden de modificar en una tabla los datos especificados como parámetros
-     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1
+     * Prepara y ejecuta la orden de modificar los datos en una tabla.
+     * @param id Define el campo principal de la tabla de tipo entero.
+     * @param nombre Define un campo de la tabla de tipo cadena de texto.
+     * @param apellidos Define un campo de la tabla de tipo cadena de texto.
+     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1.
      */
     public int modificar(int id, String nombre, String apellidos){
         try{
@@ -106,8 +112,9 @@ public class SQLite{
     }
     
     /**
-     * Prepara y ejecuta la orden de consultar una fila concreta de una tabla
-     * @return Devuelve el resultado de la consulta en el caso de que la sentencia sea exitosa, de lo contrario devuelve null
+     * Prepara y ejecuta la orden de consultar una fila concreta de la tabla.
+     * @param id Define el campo principal de la tabla de tipo entero.
+     * @return Devuelve el resultado de la consulta en el caso de que la sentencia sea exitosa, de lo contrario devuelve nulo.
      */
     public String consultar(int id){
         try{
@@ -128,8 +135,9 @@ public class SQLite{
     }
     
     /**
-     * Prepara y ejecuta la orden de eliminar una fila concreta de una tabla
-     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1
+     * Prepara y ejecuta la orden de eliminar una fila concreta de la tabla.
+     * @param id Define el campo principal de la tabla de tipo entero.
+     * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1.
      */
     public int eliminar(int id){
         try{

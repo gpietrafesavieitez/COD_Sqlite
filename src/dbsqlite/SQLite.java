@@ -8,11 +8,10 @@ import java.sql.ResultSet;
 
 /**
  * Esta clase sirve de herramienta principal para trabajar e interactuar con SQLite.
- * @author: gpietrafesavieitez
- * @version: 20/05/19
+ * @author gpietrafesavieitez
+ * @version 20/05/19
  * @see <a href = "https://moodle.danielcastelao.org">CPR Daniel Castelao - Moodle</a>
  */
-
 public class SQLite{
     private Connection conn;
     private String bd;

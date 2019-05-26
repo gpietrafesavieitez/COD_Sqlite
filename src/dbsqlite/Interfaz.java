@@ -7,7 +7,7 @@ public class Interfaz extends javax.swing.JFrame{
     SQLite bd;
     
     public Interfaz(){
-        bd = new SQLite("sqlite", "alumnos");
+        bd = new SQLite("sqlite","alumnos");
         if(bd.conectar()){
             System.out.println("[ info ] Conexión satisfactoria.");
             initComponents();

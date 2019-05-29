@@ -14,9 +14,11 @@ import java.sql.ResultSet;
  */
 public class SQLite{
     private Connection conn;
-    private String bd;
-    private String tabla;
-
+    private String bd, tabla;
+    
+    /**
+     * Constructor sin parámetros
+     */
     public SQLite(){
     }
     
@@ -66,12 +68,12 @@ public class SQLite{
     
     /**
      * Prepara y ejecuta la orden de crear una tabla.
-     * @param tabla Define el nombre de la tabla a crear.
+     * @param tabla Define el nombre de la tabla a crearTabla.
      * @return Devuelve verdadero en el caso de que la sentencia sea exitosa, de lo contrario devuelve falso.
      */
-    public boolean crear(String tabla){
+    public boolean crearTabla(String tabla){
         try{
-            PreparedStatement st = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tabla + "(id integer PRIMARY KEY AUTOINCREMENT, nombre VARCHAR(140), apellidos VARCHAR(140))");
+            PreparedStatement st = conn.prepareStatement("CREATE TABLE IF NOT EXISTS " + tabla + "(id integer PRIMARY KEY AUTOINCREMENT, nombre VARCHAR, apellido VARCHAR)");
             st.execute();
             return true;
         }catch(SQLException e){
@@ -82,12 +84,12 @@ public class SQLite{
     /**
      * Prepara y ejecuta la orden de insertar datos en una tabla.
      * @param nombre Define un campo de la tabla de tipo cadena de texto.
-     * @param apellidos Define un campo de la tabla de tipo cadena de texto.
+     * @param apellido Define un campo de la tabla de tipo cadena de texto.
      * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1.
      */
-    public int insertar(String nombre, String apellidos){
+    public int insertar(String nombre, String apellido){
         try{
-            PreparedStatement st = conn.prepareStatement("INSERT INTO " + tabla + "(nombre, apellidos) VALUES ('" + nombre + "', '" + apellidos + "')");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO " + tabla + "(nombre, apellido) VALUES ('" + nombre + "', '" + apellido + "')");
             return st.executeUpdate();
         }catch(SQLException e){
             return -1;
@@ -98,12 +100,12 @@ public class SQLite{
      * Prepara y ejecuta la orden de modificar los datos en una tabla.
      * @param id Define el campo principal de la tabla de tipo entero.
      * @param nombre Define un campo de la tabla de tipo cadena de texto.
-     * @param apellidos Define un campo de la tabla de tipo cadena de texto.
+     * @param apellido Define un campo de la tabla de tipo cadena de texto.
      * @return Devuelve el número de filas afectadas en el caso de que la sentencia sea exitosa, de lo contrario devuelve -1.
      */
-    public int modificar(int id, String nombre, String apellidos){
+    public int modificar(int id, String nombre, String apellido){
         try{
-            PreparedStatement st = conn.prepareStatement("UPDATE " + tabla + " SET nombre='" + nombre + "',apellidos='" + apellidos + "' WHERE id=" + id);
+            PreparedStatement st = conn.prepareStatement("UPDATE " + tabla + " SET nombre='" + nombre + "',apellido='" + apellido + "' WHERE id=" + id);
             return st.executeUpdate();
         }catch(SQLException e){
             return -1;
@@ -121,12 +123,12 @@ public class SQLite{
             ResultSet result = st.executeQuery();
             StringBuilder sb = new StringBuilder();
             while(result.next()){
-                sb.append("- Nombre: " + result.getString("nombre") + "\n- Apellidos: " + result.getString("apellidos"));
+                sb.append("- Nombre: " + result.getString("nombre") + "\n- Apellido: " + result.getString("apellido"));
             }
             if(sb.length() != 0){
                 return sb.toString();
             }else{
-                return null;
+                return "No existen coincidencias.";
             }
         }catch(SQLException e){
             return null;

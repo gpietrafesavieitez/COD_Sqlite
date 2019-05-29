@@ -5,14 +5,28 @@ import javax.swing.JOptionPane;
 public class Interfaz extends javax.swing.JFrame{
     
     SQLite bd;
+    private final byte CODERROR = 0, CODINFO = 1, CODAVISO = 2, CODINPUT = 3;
+    
+    private void crearMensaje(String msg, byte cod){
+        JOptionPane.showMessageDialog(null, msg, "SQLite", cod);
+    }
+    
+    private String crearInputString(String msg){
+        return JOptionPane.showInputDialog(null, msg, "SQLite", CODINPUT);
+    }
+    
+    private int crearInputInteger(String msg){
+        return Integer.parseInt(JOptionPane.showInputDialog(null, msg, "SQLite", CODINPUT
+        ));
+    }
     
     public Interfaz(){
-        bd = new SQLite("sqlite","alumnos");
+        bd = new SQLite("sqlite", "alumnos");
         if(bd.conectar()){
             System.out.println("[ info ] Conexión satisfactoria.");
             initComponents();
         }else{
-            JOptionPane.showMessageDialog(null, "Error de conexión.", "SQLite", 0);
+            crearMensaje("Error de conexión.", CODERROR);
             System.out.println("[ error ] No se ha podido establecer una conexión con la base de datos.");
             System.exit(0);
         }
@@ -143,24 +157,31 @@ public class Interfaz extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(bd.crear(JOptionPane.showInputDialog(null, "Introduzca el nombre de la tabla:\n", "SQLite", 3))){
-            JOptionPane.showMessageDialog(null, "Tabla creada satisfactoriamente.", "SQLite", 1);
+        String nombre = crearInputString("Introduzca el nombre de la tabla:\n");
+        if(!nombre.isEmpty()){
+            if(bd.crearTabla(nombre)){
+                crearMensaje("Tabla creada satisfactoriamente.", CODINFO);
+            }else{
+                crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                System.out.println("[ error ] Ha habido un fallo en la operación de crear tabla.");
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+            crearMensaje("El campo no puede estar vacío.", CODAVISO);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 //GEN-FIRST:event_jButton4ActionPerformed
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            int f = bd.eliminar(Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3)));
+            int f = bd.eliminar(crearInputInteger("Búsqueda por ID:"));
             if(f > 0){
-                JOptionPane.showMessageDialog(null, "Entrada eliminada satisfactoriamente.", "SQLite", 1);
+                crearMensaje("Entrada eliminada satisfactoriamente.", CODINFO);
                 System.out.println("[ info ] " + f + " fila(s) afectada(s).");
             }else{
-                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
+                crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                System.out.println("[ error ] Ha habido un fallo en la operación de eliminar.");
             }
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
+            crearMensaje("El formato introducido no es válido.", CODAVISO);
             System.out.println("[ error ] " + e.getMessage());
         }
     }
@@ -168,56 +189,60 @@ public class Interfaz extends javax.swing.JFrame{
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try{
-            String query = bd.consultar(Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3)));
+            String query = bd.consultar(crearInputInteger("Búsqueda por ID:"));
             if(query != null){
-                JOptionPane.showMessageDialog(null, query, "SQLite", 1);
+                crearMensaje(query, CODINFO);
             }else{
-                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
+                crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                System.out.println("[ error ] Ha habido un fallo en la operación de buscar.");
             }
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
+            crearMensaje("El formato introducido no es válido.", CODAVISO);
             System.out.println("[ error ] " + e.getMessage());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
-            int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Búsqueda por ID:", "SQLite", 3));
+            int id = crearInputInteger("Búsqueda por ID:");
             String query = bd.consultar(id);
             if(query != null){
-                String nombre = JOptionPane.showInputDialog(null, "Introduzca nuevo nombre para:\n" + query, "SQLite", 3);
-                String apellidos = JOptionPane.showInputDialog(null, "Introduzca nuevo(s) apellido(s) para:\n" + query, "SQLite", 3);
+                String nombre = crearInputString("Introduzca nuevo nombre para:\n" + query);
+                String apellidos = crearInputString("Introduzca nuevo apellido para:\n" + query);
                 if(!nombre.isEmpty() && !apellidos.isEmpty()){
                     if(bd.modificar(id, nombre, apellidos) > 0){
-                        JOptionPane.showMessageDialog(null, "Entrada actualizada satisfactoriamente.", "SQLite", 1);
+                        crearMensaje("Entrada actualizada satisfactoriamente.", CODINFO);
                     }else{
-                        JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+                        crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                        System.out.println("[ error ] Ha habido un fallo en la operación de modificar.");
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+                    crearMensaje("El campo no puede estar vacío.", CODAVISO);
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "No existen coincidencias.", "SQLite", 2);
+                crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                System.out.println("[ error ] Ha habido un fallo en la operación de buscar.");
             }
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "El formato introducido no es válido.", "SQLite", 0);
+            crearMensaje("El formato introducido no es válido.", CODAVISO);
             System.out.println("[ error ] " + e.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = JOptionPane.showInputDialog(null, "Introduzca el nombre:", "SQLite", 3);
-        String apellidos = JOptionPane.showInputDialog(null, "Introduzca los apellidos:", "SQLite", 3);
+        String nombre = crearInputString("Introduzca el nombre:");
+        String apellidos = crearInputString("Introduzca el apellido:");
         if(!nombre.isEmpty() && !apellidos.isEmpty()){
             int f = bd.insertar(nombre, apellidos);
             if(f > 0){
-                JOptionPane.showMessageDialog(null, "Entrada insertada satisfactoriamente.", "SQLite", 1);
+                crearMensaje("Entrada insertada satisfactoriamente.", CODINFO);
                 System.out.println("[ info ] " + f + " fila(s) afectada(s).");
             }else{
-                JOptionPane.showMessageDialog(null, "¡Ups! ha ocurrido un error.", "SQLite", 0);
+                crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+                System.out.println("[ error ] Ha habido un fallo en la operación de insertar.");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "El campo no puede estar vacío.", "SQLite", 2);
+            crearMensaje("El campo no puede estar vacío.", CODAVISO);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -225,12 +250,37 @@ public class Interfaz extends javax.swing.JFrame{
         if(bd.desconectar()){
             System.out.println("[ info ] Desconexión satisfactoria.");
         }else{
-            System.out.println("[ error ] Ha habido problemas en la desconexión.");
+            crearMensaje("¡Ups! ha ocurrido un error.", CODERROR);
+            System.out.println("[ error ] No se ha podido establecer una desconexión con la base de datos.");
         }
         System.exit(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     public static void main(String args[]){
+        System.out.println("Debug console:");
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        
         java.awt.EventQueue.invokeLater(new Runnable(){
             public void run(){
                 new Interfaz().setVisible(true);
